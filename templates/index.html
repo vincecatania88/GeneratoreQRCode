@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Generatore QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        input[type="text"], input[type="file"] {
+            padding: 10px;
+            width: 300px;
+        }
+        button {
+            padding: 10px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1e40af;
+        }
+        img {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generatore QR Code</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="url" placeholder="Inserisci URL" required>
+        <input type="file" name="logo" accept="image/*">
+        <input type="text" name="filename" placeholder="Nome file (senza estensione)">
+        <button type="submit">Genera QR Code</button>
+    </form>
+
+    {% if qr_filename %}
+        <h2>Il tuo QR Code:</h2>
+        <img src="{{ qr_filename }}" alt="QR Code">
+        <br>
+        <a href="{{ qr_filename }}" download="{{ filename }}.png">
+            <button>Scarica QR Code</button>
+        </a>
+    {% endif %}
+</body>
+</html>
